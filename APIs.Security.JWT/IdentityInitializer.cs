@@ -51,6 +51,7 @@ namespace APIs.Security.JWT
                     }, "Usr02ApiInvalido02!");
             }
         }
+
         private void CreateUser(
             ApplicationUser user,
             string password,

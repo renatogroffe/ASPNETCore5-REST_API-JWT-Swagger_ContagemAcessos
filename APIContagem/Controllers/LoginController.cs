@@ -13,7 +13,7 @@ namespace APIContagem.Controllers
         [AllowAnonymous]
         [HttpPost]
         [ProducesResponseType(typeof(Token), (int)HttpStatusCode.OK)]
-        [ProducesResponseType(typeof(Token), (int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         public ActionResult<Token> Post(
             [FromBody]User usuario,
             [FromServices]ILogger<LoginController> logger,
@@ -29,11 +29,12 @@ namespace APIContagem.Controllers
             else
             {
                 logger.LogError($"Falha na autenticação do usuário: {usuario?.UserID}");
-                return new BadRequestObjectResult(new Token()
-                {
-                    Authenticated = false,
-                    Message = "Falha ao autenticar"
-                });
+                return new UnauthorizedResult();
+                //new Token()
+                //{
+                //    Authenticated = false,
+                //    Message = "Falha ao autenticar"
+                //});
             }
         }
     }
